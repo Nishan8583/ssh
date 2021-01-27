@@ -16,7 +16,7 @@ func (s *SSH) ExecuteCommand(comamnd string, timeout time.Duration) (string, err
 	if len(output) == 0 {
 		time.Sleep(timeout * time.Second)
 
-		output = s.outputBuffer.String(
+		output = s.outputBuffer.String()
 	}
 	s.outputBuffer.Reset()
 
