@@ -46,6 +46,8 @@ func New(username, password, hostname, port string) (SSH, error) {
 	if err != nil {
 		return sshConn, err
 	}
+	sshConn.client = client
+
 	log.Printf("[+] Success Connection with %s established\n", hostname)
 
 	// Create sesssion
@@ -82,7 +84,7 @@ func New(username, password, hostname, port string) (SSH, error) {
 
 // Close closes the session, client connection and resets the buffer output respectively
 func (s *SSH) Close() {
+	s.outputBuffer.Reset()
 	s.session.Close()
 	s.client.Close()
-	s.outputBuffer.Reset()
 }
